@@ -2,29 +2,33 @@ use std::collections::HashMap;
 
 /// # LeetCode 1: Two Sum
 ///
-/// Implementiert die Lösung für das **2Sum-Problem**.
+/// Implements the optimized solution for the **Two Sum problem**.
 ///
-/// Gegeben ist ein Array von Ganzzahlen (`nums`) und ein Zielwert (`target`),
-/// finde die Indizes der beiden Zahlen, deren Summe gleich dem Zielwert ist.
+/// Given an array of integers (`nums`) and an integer target, return the **indices**
+/// of the two numbers such that they add up to the target. It is guaranteed that exactly
+/// one solution exists, and you may not use the same element twice.
 ///
-/// # Methode: Hash Map (O(n) Time Complexity)
+/// # Method: Hash Map (One-Pass)
 ///
-/// Die Lösung verwendet eine **Hash Map**, um die Zeitkomplexität von O(n²) auf **O(n)**
-/// zu reduzieren. Beim Durchlaufen des Arrays wird für jede Zahl (`num`) geprüft,
-/// ob das **Komplement** (`target - num`) bereits in der Map gespeichert wurde.
+/// This solution uses a **Hash Map** (or Hash Table) to reduce the computational complexity
+/// from $O(n^2)$ (Brute Force) to **$O(n)$** (Linear Time).
 ///
-/// * **Map-Inhalt:** Die Schlüssel sind die Werte (`num`), die Indizes sind die Positionen (`i`).
-/// * **Prüfung:** `map.get(&complement)` prüft, ob der *Partner* bereits gesehen wurde.
-/// * **Rückgabe:** Wenn der Partner gefunden wird, werden dessen gespeicherter Index (`j`)
-///     und der aktuelle Index (`i`) zurückgegeben.
+/// The algorithm iterates through the array only once (one-pass):
+/// 1. For each number, it calculates the **complement** needed to reach the target.
+/// 2. It instantly checks if the complement already exists as a key in the map.
+/// 3. If found, the solution is immediate. If not, the current number is stored for future checks.
 ///
-/// # Komplexität
+/// * **Map Content:** Keys store the **value** (`num`), and values store the **index** (`i`).
+/// * **Check:** `map.get(&complement)` performs a fast $O(1)$ average time lookup for the partner.
+/// * **Return:** If the partner is found at index `j`, the function returns `[j, i]`.
 ///
-/// * **Zeit:** O(n), da jeder Wert im Array nur einmal in die Hash Map eingefügt
-///     und einmal nachgesehen wird.
-/// * **Speicher:** O(n), um bis zu $n$ Elemente in der Hash Map zu speichern.
+/// # Complexity Analysis
 ///
-/// # Beispiel (basierend auf LeetCode Test Case)
+/// * **Time Complexity:** $O(n)$ — The array is processed exactly once, and Hash Map operations
+///     (insertion and lookup) take $O(1)$ average time.
+/// * **Space Complexity:** $O(n)$ — In the worst-case scenario, the Hash Map will store $n-1$ elements.
+///
+/// # Example (Based on LeetCode Test Case)
 ///
 /// ```rust
 /// use leetcode::problems::two_sum::Solution;
@@ -32,34 +36,32 @@ use std::collections::HashMap;
 /// let nums = vec![2, 7, 11, 15];
 /// let target = 9;
 /// let result = Solution::two_sum(nums, target);
-/// // Die Summe von nums[0] (2) und nums[1] (7) ist 9.
+/// // The sum of nums[0] (2) and nums[1] (7) is 9.
 /// assert_eq!(result, vec![0, 1]);
 /// ```
 ///
-pub struct Solution; // Notwendig für die LeetCode impl Block Struktur
+pub struct Solution; // Essential wrapper for LeetCode's environment
 
 impl Solution {
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-        // Erstellt die Hash Map mit einer anfänglichen Kapazität, um Reallokationen zu reduzieren.
+        // Creates the Hash Map with an initial capacity equal to the input size to minimize reallocations.
         let mut map: HashMap<i32, usize> = HashMap::with_capacity(nums.len());
 
         for (i, &num) in nums.iter().enumerate() {
-            // Berechnet den Wert, der zur aktuellen Zahl fehlt, um das Target zu erreichen.
+            // Calculates the required partner value (complement).
             let complement = target - num;
 
-            // Prüft, ob das Komplement bereits in der Map gesehen wurde.
+            // Checks if the complement has already been processed and stored in the map.
             if let Some(&j) = map.get(&complement) {
-                // Das Komplement wurde gefunden! Gibt die Indizes zurück.
-                // j ist der Index des Komplements, i ist der Index der aktuellen Zahl.
+                // Complement found! Return the indices: j (complement's index) and i (current number's index).
                 return vec![j as i32, i as i32];
             }
 
-            // Wenn das Komplement nicht gefunden wurde, speichere die aktuelle Zahl
-            // und ihren Index für zukünftige Komplemente.
+            // If the complement is not found, store the current number and its index for future checks.
             map.insert(num, i);
         }
 
-        // LeetCode garantiert eine Lösung, aber dies ist der Fallback.
+        // Returns an empty vector if no solution is found (LeetCode guarantees one, but this is the fallback).
         vec![]
     }
 }
