@@ -43,17 +43,3 @@ fn example_3_duplicates_integration_test() {
     assert_eq!(result, expected, "Integration Test 3 failed for duplicate values.");
 }
 
-// You could add another test case here, like:
-/*
-#[test]
-fn edge_case_negative_numbers() {
-    let nums = vec![-1, -2, -3, -4, -5];
-    let target = -8; // -3 + -5 = -8
-    let expected = vec![2, 4];
-
-    let mut result = Solution::two_sum(nums, target);
-    result.sort_unstable();
-    
-    assert_eq!(result, expected, "Integration Test failed for negative numbers.");
-}
-*/
