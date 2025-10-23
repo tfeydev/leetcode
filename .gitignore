@@ -2,7 +2,7 @@
 # Rust / Cargo
 # =========================
 
-**/target/        # Compiled output and build artifacts
+target/        # Compiled output and build artifacts
 **/*.rs.bk      # Backup Rust source files (optional)
 
 # =========================
