@@ -110,10 +110,22 @@ SET search_path TO lc_175;
 (Copied from LeetCode description — **not included in repo**)
 
 ```sql
-CREATE TABLE person (...);
-CREATE TABLE address (...);
-INSERT INTO person ...;
-INSERT INTO address ...;
+CREATE TABLE Person (
+                        PersonId INTEGER,
+                        FirstName VARCHAR,
+                        LastName VARCHAR
+);
+
+CREATE TABLE Address (
+                         AddressId INTEGER,
+                         PersonId INTEGER,
+                         City VARCHAR,
+                         State VARCHAR
+);
+
+INSERT INTO Person VALUES (1, 'Allen', 'Wang'), (2, 'Bob', 'Johnson');
+INSERT INTO Address VALUES (1, 2, 'New York', 'NY');
+
 ```
 
 ### 3. Run the solution
