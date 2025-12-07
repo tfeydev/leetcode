@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://163.176.159.220:5432/leetcode_db
+    username: leetcode
+    password: changeme
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+app:
+  github:
+    # GitHub tree API (recursive) — adjust owner/repo/branch
+    tree-api-url: "https://api.github.com/repos/techthordev/leetcode/git/trees/main?recursive=1"
+    # Raw base URL should end with a slash
+    raw-base-url: "https://raw.githubusercontent.com/techthordev/leetcode/main/"
+    owner: "techthordev"
+    repo: "leetcode"
+    branch: "main"
+    # optional: token to raise rate limits
+    token: ""
