@@ -1,5 +1,3 @@
--- SET search_path TO lc_175, public;
-
 SELECT 
     p.firstname,
     p.lastname,
