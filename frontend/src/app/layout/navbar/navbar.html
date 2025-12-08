@@ -1,0 +1,83 @@
+<nav class="bg-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20"> <!-- Increased height for logo -->
+      
+      <!-- Logo / Branding -->
+      <div class="flex items-center space-x-3 shrink-0">
+        <a [routerLink]="['/']" class="flex items-center space-x-3">
+          <!-- Logo Image (Assumed in assets/thors-hammer-logo.jpg) -->
+          <img 
+            src="./assets/thors-hammer-logo.jpg" 
+            alt="TechThorDev Logo - Thor's Hammer" 
+            class="h-10 w-auto rounded-full shadow-md"
+            onerror="this.onerror=null; this.src='https://placehold.co/40x40/007bff/ffffff?text=TD'"
+          >
+          <span class="text-3xl font-extrabold text-blue-500 hover:text-blue-800 transition duration-300 hidden sm:block">
+            LeetCode - TechThorDev
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden sm:ml-6 sm:flex sm:space-x-6">
+        @for (link of navLinks; track link.path) {
+          <a
+            [routerLink]="link.path"
+            [target]="link.isExternal ? '_blank' : '_self'"
+            routerLinkActive="bg-blue-100 text-blue-800 font-bold"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="text-gray-600 hover:bg-blue-50 hover:text-blue-700 px-3 py-2 rounded-lg text-lg font-medium transition duration-150"
+            aria-current="page"
+          >
+            {{ link.title }}
+          </a>
+        }
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="sm:hidden flex items-center">
+        <button 
+          (click)="toggleMenu()" 
+          routerLinkActive="bg-blue-100 text-blue-800 font-bold"
+          type="button" 
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition duration-150"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <!-- Hamburger Menu Icon -->
+          @if (!isMenuOpen) {
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          }
+          <!-- X Close Icon -->
+          @if (isMenuOpen) {
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Content -->
+  @if (isMenuOpen) {
+    <div class="sm:hidden bg-gray-50 border-t" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        @for (link of navLinks; track link.path) {
+          <a
+            [routerLink]="link.path"
+            (click)="toggleMenu()"
+            [target]="link.isExternal ? '_blank' : '_self'"
+            routerLinkActive="bg-blue-100 text-blue-800 font-bold"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="text-gray-700 hover:bg-blue-100 hover:text-blue-700 block px-3 py-2 rounded-md text-base font-medium transition duration-150"
+          >
+            {{ link.title }}
+          </a>
+        }
+      </div>
+    </div>
+  }
+</nav>
