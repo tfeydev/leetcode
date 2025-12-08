@@ -20,7 +20,7 @@ public class ProblemExecutionController {
 
     /**
      * Executes the SQL solution for a specific problem via Query Parameter.
-     * URL Example: http://localhost:8080/api/problems/execute?path=easy/175_combine_two_tables/solution
+     * URL Example: <a href="http://localhost:8080/api/problems/execute?path=easy/175_combine_two_tables/solution">...</a>
      */
     @GetMapping("/execute")
     public ResponseEntity<List<Map<String, Object>>> executeProblem(
