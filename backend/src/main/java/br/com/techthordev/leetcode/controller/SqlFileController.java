@@ -32,7 +32,7 @@ public class SqlFileController {
 
     /**
      * Query param version:
-     * Example: curl "http://localhost:8080/api/sql-content?path=easy/175_combine_two_tables/solution"
+     * Example: curl "<a href="http://localhost:8080/api/sql-content?path=easy/175_combine_two_tables/solution">...</a>"
      */
     @GetMapping(value = "/sql-content", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> getSqlContent(@RequestParam("path") String path) {
@@ -51,7 +51,7 @@ public class SqlFileController {
 
     /**
      * Path-based version:
-     * Example: http://localhost:8080/api/sql-content/easy/175_combine_two_tables/solution
+     * Example: <a href="http://localhost:8080/api/sql-content/easy/175_combine_two_tables/solution">...</a>
      */
     @GetMapping(value = "/sql-content/**", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> getSqlContentByPath(HttpServletRequest request) {

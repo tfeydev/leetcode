@@ -20,3 +20,6 @@ app:
     repo: ${GITHUB_REPO:leetcode}
     branch: ${GITHUB_BRANCH:gh-pages}
     token: ${GITHUB_TOKEN:}
+
+server:
+  address: 0.0.0.0
