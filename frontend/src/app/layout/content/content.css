@@ -1,0 +1,40 @@
+.markdown-render h1, h2, h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.markdown-render p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.markdown-render pre {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+}
+
+.markdown-render code {
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Fira Code', monospace;
+}
+
+.markdown-render table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.markdown-render th, td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
