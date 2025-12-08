@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  github:
+    tree-api-url: ${GITHUB_TREE_API_URL}
+    raw-base-url: ${GITHUB_RAW_BASE_URL}
+    owner: ${GITHUB_OWNER:techthordev}
+    repo: ${GITHUB_REPO:leetcode}
+    branch: ${GITHUB_BRANCH:gh-pages}
+    token: ${GITHUB_TOKEN:}
+
+server:
+  address: 0.0.0.0
