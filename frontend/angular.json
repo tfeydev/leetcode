@@ -70,7 +70,7 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "baseHref": "/leetcode/",
-            "dir": "dist/frontend"
+            "dir": "dist/frontend/browser"
           }
         }
       }
