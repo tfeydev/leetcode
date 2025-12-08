@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy:gh": "ng deploy frontend --build-target-frontend:build:production",
+    "deploy:gh": "ng deploy frontend --build-target=frontend:build:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
