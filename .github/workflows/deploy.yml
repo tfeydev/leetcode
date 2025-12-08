@@ -23,7 +23,7 @@ jobs:
         working-directory: ./frontend
 
       - name: Build Angular app
-        run: npm run build -- --base-href "/leetcode/"
+        run: npm run build -- --base-href "/frontend/"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
