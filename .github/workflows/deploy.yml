@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy Frontend
         # ng deploy führt den Build durch und pusht das Ergebnis automatisch auf gh-pages
-        run: ng deploy frontend --build-target=frontend:build:production
+        run: npm run deploy:gh
         working-directory: ./frontend
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
