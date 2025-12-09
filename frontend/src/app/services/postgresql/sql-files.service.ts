@@ -13,7 +13,7 @@ export interface SqlFile {
 })
 export class SqlFilesService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://163.176.159.220:8080/api/sql-files';
+  private baseUrl = 'https://163.176.159.220/api/sql-files';
 
   getSqlFiles(): Observable<SqlFile[]> {
     return this.http.get<string[]>(this.baseUrl).pipe(
