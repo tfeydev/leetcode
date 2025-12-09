@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class Navbar implements OnInit {
   navLinks = [
     { title: 'Home', path: '/', isExternal: false },
-
+    { title: 'PostgreSQL', path: 'postgresql', isExternal: false },
   ];
 
   isMenuOpen = false;
