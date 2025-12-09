@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy": "ng build --base-href '/leetcode/' --configuration=production && npx angular-cli-ghpages --dir=dist/browser",
     "watch": "ng build --watch --configuration development",
+    "deploy": "ng build --base-href '/leetcode/' --configuration=production && npx angular-cli-ghpages --dir=dist/frontend/browser",
     "test": "ng test"
   },
   "prettier": {
