@@ -14,13 +14,16 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(org.springframework.web.servlet.config.annotation.CorsRegistry registry) {
                 registry.addMapping("/**")
+                        // allow the production frontend origin + local dev and the main domain
                         .allowedOrigins(
+                                "https://leetcode.techthordev.com.br",
                                 "http://localhost:4200",
                                 "https://techthordev.github.io",
                                 "https://techthordev.com.br"
                         )
-                        .allowedMethods("GET")
-                        .allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
