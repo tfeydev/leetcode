@@ -15,7 +15,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class SqlFileController {
 
     private final GithubRepoService githubRepoService;

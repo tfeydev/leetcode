@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/problems")
+@RequestMapping("/problems")
 public class ProblemExecutionController {
 
     private final SqlExecutionService sqlExecutionService;
