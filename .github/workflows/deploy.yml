@@ -40,7 +40,7 @@ jobs:
           ./gradlew clean bootJar -x test --no-daemon
 
       - name: Upload JAR artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: springboot-jar
           path: backend/build/libs/*-boot.jar
