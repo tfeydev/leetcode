@@ -16,7 +16,8 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:4200",
-                                "https://techthordev.github.io"
+                                "https://techthordev.github.io",
+                                "https://techthordev.com.br"
                         )
                         .allowedMethods("GET")
                         .allowedHeaders("*");
