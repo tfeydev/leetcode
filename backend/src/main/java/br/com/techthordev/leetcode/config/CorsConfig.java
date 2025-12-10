@@ -17,8 +17,8 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         // allow the production frontend origin + local dev and the main domain
                         .allowedOriginPatterns(
-                                "https://leetcode.techthordev.com.br",
                                 "http://localhost:4200",
+                                "https://leetcode.techthordev.com.br",
                                 "https://techthordev.github.io",
                                 "https://techthordev.com.br"
                         )
