@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 export interface SqlFile {
@@ -16,18 +16,20 @@ export class SqlFilesService {
   private baseUrl = 'https://api.techthordev.com.br/sql-files';
 
   getSqlFiles(): Observable<SqlFile[]> {
-    return this.http.get<string[]>(this.baseUrl).pipe(
-      map(files => files.map(path => {
-        const parts = path.split('/');
-        return {
-          difficulty: parts[1],
-          problem: parts[2]
-        } as SqlFile;
-      })),
-      catchError(err => {
-        console.error('Error loading SQL files', err);
-        return of([]);
-      })
+    return this.http.get<any>(this.baseUrl).pipe(
+      map(files => {
+        if (!Array.isArray(files)) {
+          return [];
+        }
+        return files.map(path => {
+          const parts = String(path).split('/').filter(Boolean);
+          return {
+            difficulty: parts[1] ?? parts[0] ?? '',
+            problem: parts[2] ?? parts[1] ?? ''
+          } as SqlFile;
+        });
+      }),
+      catchError(err => throwError(() => err))
     );
   }
 }

@@ -1,46 +1,44 @@
 <div class="flex-1 bg-white py-12 px-4 sm:px-6 lg:px-8">
   <main class="max-w-3xl mx-auto">
-    <div class="flex-1 bg-white py-12 px-4 sm:px-6 lg:px-8">
-      <main class="max-w-3xl mx-auto">
-        <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-xl shadow-md">
-          <h1 class="text-2xl font-bold text-blue-500 mb-4">🐘 PostgreSQL Problems</h1>
-
-          <!-- Loading Spinner -->
-          @if (loading) {
-          <div class="flex justify-center items-center py-10">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-green-600"></div>
-            <span class="ml-4 text-gray-600">Loading...</span>
-          </div>
-          }
-
-          <!-- Error Message -->
-          @if (error) {
-          <div class="text-red-600 font-semibold">
-            Failed to load problems. Please try again later.
-          </div>
-          }
-
-          <!-- Table -->
-          @if (!loading && !error) {
-          <table class="min-w-full border-collapse border border-gray-300">
-            <thead class="bg-gray-100">
-              <tr>
-                <th class="border border-gray-300 px-4 py-2 text-left">Difficulty</th>
-                <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (row of rows; track row.problem) {
-              <tr>
-                <td class="border border-gray-300 px-4 py-2">{{ row.difficulty }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ row.problem }}</td>
-              </tr>
-              }
-            </tbody>
-          </table>
-          }
+    <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-xl shadow-md">
+      <div class="flex items-center justify-between mb-4">
+        <h1 class="text-2xl font-bold text-blue-500">🐘 PostgreSQL Problems</h1>
+        <div class="flex gap-2">
+          <button
+            class="px-3 py-1 bg-gray-200 text-gray-800 rounded disabled:opacity-50 flex items-center gap-2"
+            (click)="reload()"
+            [disabled]="loading"
+            title="Reload"
+          >
+            <i class="fas fa-sync-alt" [class.animate-spin]="loading"></i>
+            
+          </button>
         </div>
-      </main>
+      </div>
+
+      <div *ngIf="loading" class="flex justify-center items-center py-10">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+        <span class="ml-4 text-gray-600">Loading...</span>
+      </div>
+
+      <div *ngIf="error" class="text-red-600 font-semibold">
+        Failed to load problems. Please try again later.
+      </div>
+
+      <table *ngIf="rows.length > 0" class="min-w-full border-collapse border border-gray-300">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border border-gray-300 px-4 py-2 text-left">Difficulty</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows; trackBy: trackByProblem">
+            <td class="border border-gray-300 px-4 py-2">{{ row.difficulty }}</td>
+            <td class="border border-gray-300 px-4 py-2">{{ row.problem }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </main>
 </div>
