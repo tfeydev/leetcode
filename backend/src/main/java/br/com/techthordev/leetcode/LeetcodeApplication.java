@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class LeetcodeApplication {
 
-	static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(LeetcodeApplication.class, args);
 	}
 
