@@ -60,8 +60,8 @@ export class Postgresql implements OnInit, OnDestroy {
       });
   }
 
-  highlightSql(code: string): string {
-    return Prism.highlight(code, Prism.languages['sql'], 'sql');
+  highlightSql(text: string) {
+    return Prism.highlight(text.trimStart(), Prism.languages['sql'], 'sql');
   }
 
   openModal(type: 'sql' | 'result', path: string): void {
