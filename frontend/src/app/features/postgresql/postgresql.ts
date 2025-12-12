@@ -3,13 +3,12 @@ import { SqlFilesService, SqlFile } from '../../services/postgresql/sql-files.se
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-sql';
+import { DbProblemModal } from '../postgresql/db-problem-modal/db-problem-modal';
 
 @Component({
   selector: 'app-postgresql',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DbProblemModal],
   templateUrl: './postgresql.html',
 })
 export class Postgresql implements OnInit, OnDestroy {
@@ -22,10 +21,10 @@ export class Postgresql implements OnInit, OnDestroy {
   loading = false;
   error = false;
 
-  selectedFile: string | null = null;
+  selectedFile: string = '';
   modalType: 'sql' | 'result' | null = null;
 
-  sqlContent: string | null = null;
+  sqlContent: string = '';
   executionResult: any[] = [];
   executionColumns: string[] = [];
 
@@ -60,16 +59,12 @@ export class Postgresql implements OnInit, OnDestroy {
       });
   }
 
-  highlightSql(text: string) {
-    return Prism.highlight(text.trimStart(), Prism.languages['sql'], 'sql');
-  }
-
   openModal(type: 'sql' | 'result', path: string): void {
     this.selectedFile = path;
     this.modalType = type;
     this.executionColumns = [];
     this.executionResult = [];
-    this.sqlContent = null;
+    this.sqlContent = '';
 
     if (type === 'sql') {
       this.service.getSqlContent(path).subscribe({
@@ -106,8 +101,8 @@ export class Postgresql implements OnInit, OnDestroy {
 
   closeModal(): void {
     this.modalType = null;
-    this.selectedFile = null;
-    this.sqlContent = null;
+    this.selectedFile = '';
+    this.sqlContent = '';
     this.executionResult = [];
   }
 

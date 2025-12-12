@@ -1,0 +1,54 @@
+<div class="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative">
+    <button
+      (click)="close.emit()"
+      class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+    >
+      ✕
+    </button>
+
+    <h2 class="text-xl font-bold mb-4">
+      {{ type === 'sql' ? 'SQL Solution Code' : 'Execution Result' }} – {{ file }}
+    </h2>
+
+    @if (type === 'sql') {
+<pre class="language-sql bg-gray-100 p-3 rounded text-sm overflow-x-auto text-left whitespace-pre">
+<code class="language-sql whitespace-pre"
+    [innerHTML]="highlightSql(sqlContent || '')"></code>
+</pre>
+    } @if (type === 'result') {
+    <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden text-sm">
+      @if (executionResult.length > 0) {
+        <thead class="bg-gray-100 text-gray-700">
+          <tr>
+            @for (colName of executionColumns; track colName) {
+              <th class="border border-gray-300 px-4 py-2 font-semibold text-left">
+                {{ colName | titlecase }}
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of executionResult; track row) {
+            <tr class="hover:bg-gray-50 transition">
+              @for (colName of executionColumns; track colName) {
+                <td class="border border-gray-300 px-4 py-2">
+                  {{ row[colName] === null ? 'NULL' : row[colName] }}
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      } @else {
+        <tbody>
+          <tr>
+            <td colspan="4" class="px-4 py-3 text-center text-gray-500">
+              No results found or execution failed.
+            </td>
+          </tr>
+        </tbody>
+      }
+    </table>
+    }
+  </div>
+</div>
