@@ -87,11 +87,10 @@
       </h2>
 
       @if (modalType === 'sql') {
-      <pre
-        class="language-sql bg-gray-100 p-3 rounded text-sm overflow-x-auto text-left whitespace-pre"
-      >
-       <code class="language-sql whitespace-pre" [innerHTML]="highlightSql(sqlContent || '')"></code>
-       </pre>
+<pre class="language-sql bg-gray-100 p-3 rounded text-sm overflow-x-auto text-left whitespace-pre">
+<code class="language-sql whitespace-pre"
+      [innerHTML]="highlightSql(sqlContent || '')"></code>
+</pre>
       } @if (modalType === 'result') {
       <table class="table-auto border-collapse border border-gray-400 w-full text-sm">
         @if (executionResult.length > 0) {
