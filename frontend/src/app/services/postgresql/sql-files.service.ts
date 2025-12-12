@@ -8,19 +8,15 @@ export interface SqlFile {
   problem: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SqlFilesService {
   private http = inject(HttpClient);
-  private baseUrl = 'https://api.techthordev.com.br/sql-files';
+  private baseUrl = 'https://api.techthordev.com.br';
 
   getSqlFiles(): Observable<SqlFile[]> {
-    return this.http.get<any>(this.baseUrl).pipe(
+    return this.http.get<any>(`${this.baseUrl}/sql-files`).pipe(
       map(files => {
-        if (!Array.isArray(files)) {
-          return [];
-        }
+        if (!Array.isArray(files)) return [];
         return files.map(path => {
           const parts = String(path).split('/').filter(Boolean);
           return {
@@ -31,5 +27,18 @@ export class SqlFilesService {
       }),
       catchError(err => throwError(() => err))
     );
+  }
+
+  getSqlContent(path: string): Observable<string> {
+    return this.http.get(`${this.baseUrl}/sql-content`, {
+      params: { path },
+      responseType: 'text'
+    });
+  }
+
+  executeProblem(path: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/problems/execute`, {
+      params: { path }
+    });
   }
 }

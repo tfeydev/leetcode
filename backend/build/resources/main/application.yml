@@ -23,3 +23,18 @@ app:
 
 server:
   address: 0.0.0.0
+  port: 8080
+  servlet:
+    context-path: /
+  forward-headers-strategy: native
+  ssl:
+    enabled: false
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,info,metrics
+    endpoint:
+      health:
+        show-details: never
