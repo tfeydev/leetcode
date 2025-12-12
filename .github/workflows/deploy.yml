@@ -92,6 +92,7 @@ jobs:
             podman run -d \
               --name container-springboot-backend \
               --restart=always \
+              --env-file /home/opc/backend/.env
               -p 8080:8080 \
               ghcr.io/techthordev/springboot-backend:latest
 
