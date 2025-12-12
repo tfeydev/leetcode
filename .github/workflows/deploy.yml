@@ -15,6 +15,7 @@ jobs:
   build-and-push:
     name: Build JAR and Push Docker image to GHCR
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
