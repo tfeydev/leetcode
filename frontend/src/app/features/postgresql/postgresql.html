@@ -1,85 +1,92 @@
-<div class="flex-1 bg-white py-12 px-4 sm:px-6 lg:px-8">
-  <main class="max-w-3xl mx-auto">
-    <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-xl shadow-md">
-      <!-- Header -->
-      <div class="flex items-center justify-between mb-4">
-        <h1 class="text-2xl font-bold text-blue-500">🐘 PostgreSQL Problems</h1>
-        <div class="flex gap-2">
-          <button
-            class="px-3 py-1 bg-gray-200 text-gray-800 rounded disabled:opacity-50 flex items-center gap-2"
-            (click)="reload()"
-            [disabled]="loading"
-            title="Reload"
-          >
-            <i class="fas fa-sync-alt" [class.animate-spin]="loading"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Loading -->
-      @if (loading) {
-      <div class="flex justify-center items-center py-10">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-        <span class="ml-4 text-gray-600">Loading...</span>
-      </div>
-      }
-
-      <!-- Error -->
-      @if (error) {
-      <div class="text-red-600 font-semibold">Failed to load problems. Please try again later.</div>
-      }
-
-      <!-- Table -->
-      @if (rows.length > 0) {
-      <table class="min-w-full border-collapse border border-gray-300">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="border border-gray-300 px-4 py-2 text-left">Difficulty</th>
-            <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
-            <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (file of rows; track file.problem) {
-          <tr class="border-t">
-            <td class="border border-gray-300 px-4 py-2 text-sm text-blue-600 font-semibold">
-              {{ file.difficulty }}
-            </td>
-
-            <td class="border border-gray-300 px-4 py-2 font-mono text-sm">{{ file.problem }}</td>
-
-            <td class="border border-gray-300 px-4 py-2 space-x-2">
-              <button
-                (click)="openModal('result', file.fullPath)"
-                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-              >
-                Execution Result
-              </button>
-
-              <button
-                (click)="openModal('sql', file.fullPath)"
-                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-              >
-                SQL Solution Code
-              </button>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
-      }
+<app-page-layout>
+  <div class="mb-8 text-center">
+    <h2 class="text-3xl font-bold text-blue-500 mb-4">⚡ PostgreSQL LeetCode Challenges ⚡</h2>
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+      Master real-world SQL problems in PostgreSQL.<br />
+      Explore hand-picked challenges with live execution, clean solutions, and detailed results.<br />
+      From window functions to complex joins — practice like a pro.
+    </p>
+    <p class="mt-4 text-gray-500">
+      🚀 Execute queries instantly. Study optimal solutions. Level up your SQL game.
+    </p>
+  </div>
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold text-blue-500">🐘 PostgreSQL Problems</h1>
+    <div class="flex gap-2">
+      <button
+        class="px-3 py-1 bg-gray-200 text-gray-800 rounded disabled:opacity-50 flex items-center gap-2"
+        (click)="reload()"
+        [disabled]="loading"
+        title="Reload"
+      >
+        <i class="fas fa-sync-alt" [class.animate-spin]="loading"></i>
+      </button>
     </div>
-  </main>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+  <div class="flex justify-center items-center py-10">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+    <span class="ml-4 text-gray-600">Loading...</span>
+  </div>
+  }
+
+  <!-- Error -->
+  @if (error) {
+  <div class="text-red-600 font-semibold">Failed to load problems. Please try again later.</div>
+  }
+
+  <!-- Table -->
+  @if (rows.length > 0) {
+  <table class="min-w-full border-collapse border border-gray-300">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="border border-gray-300 px-4 py-2 text-left">Difficulty</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (file of rows; track file.problem) {
+      <tr class="border-t">
+        <td class="border border-gray-300 px-4 py-2 text-sm text-blue-600 font-semibold">
+          {{ file.difficulty }}
+        </td>
+
+        <td class="border border-gray-300 px-4 py-2 font-mono text-sm">{{ file.problem }}</td>
+
+        <td class="border border-gray-300 px-4 py-2 space-x-2">
+          <button
+            (click)="openModal('result', file.fullPath)"
+            class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+          >
+            Execution Result
+          </button>
+
+          <button
+            (click)="openModal('sql', file.fullPath)"
+            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+          >
+            SQL Solution Code
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
 
   <!-- Modal -->
   @if (modalType) {
-    <app-db-problem-modal
-      [type]="modalType"
-      [file]="selectedFile"
-      [sqlContent]="sqlContent"
-      [executionResult]="executionResult"
-      [executionColumns]="executionColumns"
-      (close)="closeModal()"
-    ></app-db-problem-modal>
+  <app-db-problem-modal
+    [type]="modalType"
+    [file]="selectedFile"
+    [sqlContent]="sqlContent"
+    [executionResult]="executionResult"
+    [executionColumns]="executionColumns"
+    (close)="closeModal()"
+  ></app-db-problem-modal>
   }
-</div>
+</app-page-layout>

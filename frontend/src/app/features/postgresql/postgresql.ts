@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { DbProblemModal } from '../postgresql/db-problem-modal/db-problem-modal';
+import { PageLayout } from '../../layout/page-layout/page-layout';
 
 @Component({
   selector: 'app-postgresql',
   standalone: true,
-  imports: [CommonModule, DbProblemModal],
+  imports: [CommonModule, PageLayout, DbProblemModal],
   templateUrl: './postgresql.html',
 })
 export class Postgresql implements OnInit, OnDestroy {
