@@ -1,7 +1,6 @@
 <div class="flex-1 bg-white py-12 px-4 sm:px-6 lg:px-8">
   <main class="max-w-3xl mx-auto">
     <div class="max-w-4xl mx-auto p-6 bg-gray-50 rounded-xl shadow-md">
-      
       <!-- Header -->
       <div class="flex items-center justify-between mb-4">
         <h1 class="text-2xl font-bold text-blue-500">🐘 PostgreSQL Problems</h1>
@@ -19,93 +18,109 @@
 
       <!-- Loading -->
       @if (loading) {
-        <div class="flex justify-center items-center py-10">
-          <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-          <span class="ml-4 text-gray-600">Loading...</span>
-        </div>
+      <div class="flex justify-center items-center py-10">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+        <span class="ml-4 text-gray-600">Loading...</span>
+      </div>
       }
 
       <!-- Error -->
       @if (error) {
-        <div class="text-red-600 font-semibold">
-          Failed to load problems. Please try again later.
-        </div>
+      <div class="text-red-600 font-semibold">Failed to load problems. Please try again later.</div>
       }
 
       <!-- Table -->
       @if (rows.length > 0) {
-        <table class="min-w-full border-collapse border border-gray-300">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
-              <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (file of rows; track file.problem) {
-              <tr class="border-t">
-                <td class="border border-gray-300 px-4 py-2 font-mono text-sm">
-                  {{ file.problem }}
-                </td>
+      <table class="min-w-full border-collapse border border-gray-300">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border border-gray-300 px-4 py-2 text-left">Difficulty</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Problem</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (file of rows; track file.problem) {
+          <tr class="border-t">
+            <td class="border border-gray-300 px-4 py-2 text-sm text-blue-600 font-semibold">
+              {{ file.difficulty }}
+            </td>
 
-                <td class="border border-gray-300 px-4 py-2 space-x-2">
-                  <button
-                    (click)="openModal('result', file.difficulty + '/' + file.problem + '/solution')"
-                    class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
-                    Execution Result
-                  </button>
+            <td class="border border-gray-300 px-4 py-2 font-mono text-sm">{{ file.problem }}</td>
 
-                  <button
-                    (click)="openModal('sql', file.difficulty + '/' + file.problem + '/solution')"
-                    class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
-                    SQL Solution Code
-                  </button>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
+            <td class="border border-gray-300 px-4 py-2 space-x-2">
+              <button
+                (click)="openModal('result', file.fullPath)"
+                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+              >
+                Execution Result
+              </button>
+
+              <button
+                (click)="openModal('sql', file.fullPath)"
+                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                SQL Solution Code
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
       }
     </div>
   </main>
 
   <!-- Modal -->
   @if (modalType) {
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative">
-        <button (click)="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-          ✕
-        </button>
+  <div class="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative">
+      <button
+        (click)="closeModal()"
+        class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+      >
+        ✕
+      </button>
 
-        <h2 class="text-xl font-bold mb-4">
-          {{ modalType === 'sql' ? 'SQL Solution Code' : 'Execution Result' }} – {{ selectedFile }}
-        </h2>
+      <h2 class="text-xl font-bold mb-4">
+        {{ modalType === 'sql' ? 'SQL Solution Code' : 'Execution Result' }} – {{ selectedFile }}
+      </h2>
 
-        @if (modalType === 'sql') {
-          <pre class="bg-gray-100 p-3 rounded text-sm overflow-x-auto">{{ sqlContent }}</pre>
+      @if (modalType === 'sql') {
+      <pre class="bg-gray-100 p-3 rounded text-sm overflow-x-auto text-left">
+        <code [innerHTML]="highlightSql(sqlContent || '')"></code>
+      </pre>
+      } @if (modalType === 'result') {
+      <table class="table-auto border-collapse border border-gray-400 w-full text-sm">
+        @if (executionResult.length > 0) {
+        <thead>
+          <tr>
+            @for (colName of executionColumns; track colName) {
+            <th class="border px-2 py-1">{{ colName | titlecase }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of executionResult; track row) {
+          <tr>
+            @for (colName of executionColumns; track colName) {
+            <td class="border px-2 py-1">{{ row[colName]=== null ? 'NULL' : row[colName] }}</td>
+            }
+          </tr>
+          }
+        </tbody>
+        } @else {
+        <tbody>
+          <tr>
+            <td colspan="4" class="px-2 py-1 text-center text-gray-500">
+              No results found or execution failed.
+            </td>
+          </tr>
+        </tbody>
         }
-
-        @if (modalType === 'result') {
-          <table class="table-auto border-collapse border border-gray-400 w-full text-sm">
-            <thead>
-              <tr>
-                @for (col of executionResult[0] | keyvalue; track col.key) {
-                  <th class="border px-2 py-1">{{ col.key }}</th>
-                }
-              </tr>
-            </thead>
-            <tbody>
-              @for (row of executionResult; track row) {
-                <tr>
-                  @for (col of row | keyvalue; track col.key) {
-                    <td class="border px-2 py-1">{{ col.value }}</td>
-                  }
-                </tr>
-              }
-            </tbody>
-          </table>
-        }
-      </div>
+      </table>
+      }
     </div>
+  </div>
   }
 </div>

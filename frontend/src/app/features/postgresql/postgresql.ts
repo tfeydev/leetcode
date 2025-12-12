@@ -3,12 +3,14 @@ import { SqlFilesService, SqlFile } from '../../services/postgresql/sql-files.se
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-sql';
 
 @Component({
   selector: 'app-postgresql',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './postgresql.html'
+  templateUrl: './postgresql.html',
 })
 export class Postgresql implements OnInit, OnDestroy {
   private service = inject(SqlFilesService);
@@ -25,23 +27,23 @@ export class Postgresql implements OnInit, OnDestroy {
 
   sqlContent: string | null = null;
   executionResult: any[] = [];
+  executionColumns: string[] = [];
 
   ngOnInit() {
     this.reload();
 
-    this.route.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(params => {
-        if (params['path']) {
-          this.openModal('sql', params['path']);
-        }
-      });
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params) => {
+      if (params['path']) {
+        this.openModal('sql', params['path']);
+      }
+    });
   }
 
   reload() {
     this.loading = true;
     this.error = false;
-    this.service.getSqlFiles()
+    this.service
+      .getSqlFiles()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -54,34 +56,52 @@ export class Postgresql implements OnInit, OnDestroy {
           this.error = true;
           this.loading = false;
           this.cdr.detectChanges();
-        }
+        },
       });
+  }
+
+  highlightSql(code: string): string {
+    return Prism.highlight(code, Prism.languages['sql'], 'sql');
   }
 
   openModal(type: 'sql' | 'result', path: string): void {
     this.selectedFile = path;
     this.modalType = type;
-  
+    this.executionColumns = [];
+    this.executionResult = [];
+    this.sqlContent = null;
+
     if (type === 'sql') {
-      this.service.getSqlContent(path)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: (content) => this.sqlContent = content,
-          error: (err) => {
-            console.error('Error loading SQL content', err);
-            this.sqlContent = 'Could not load SQL solution.';
-          }
-        });
+      this.service.getSqlContent(path).subscribe({
+        next: (content) => {
+          // <<< Muss jetzt { verwenden, um cdr.detectChanges() hinzuzufügen
+          this.sqlContent = content;
+          this.cdr.detectChanges(); // <<< Hinzugefügte Lösung
+        },
+        error: (err) => {
+          console.error('Error loading SQL content', err);
+          this.sqlContent = 'Could not load SQL solution.';
+          this.cdr.detectChanges(); // <<< Hinzugefügte Lösung
+        },
+      });
     } else {
-      this.service.executeProblem(path)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: (result) => this.executionResult = result,
-          error: (err) => {
-            console.error('Error executing SQL', err);
-            this.executionResult = [{ error: 'Execution failed.' }];
+      this.service.executeProblem(path).subscribe({
+        next: (result) => {
+          // <<< Muss jetzt { verwenden, um cdr.detectChanges() hinzuzufügen
+          this.executionResult = result;
+          if (result && result.length > 0) {
+            this.executionColumns = Object.keys(result[0]);
+          } else {
+            this.executionColumns = [];
           }
-        });
+          this.cdr.detectChanges(); // <<< Hinzugefügte Lösung
+        },
+        error: (err) => {
+          console.error('Error executing SQL', err);
+          this.executionResult = [{ error: 'Execution failed.' }];
+          this.cdr.detectChanges(); // <<< Hinzugefügte Lösung
+        },
+      });
     }
   }
 
