@@ -92,32 +92,36 @@
       [innerHTML]="highlightSql(sqlContent || '')"></code>
 </pre>
       } @if (modalType === 'result') {
-      <table class="table-auto border-collapse border border-gray-400 w-full text-sm">
+      <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden text-sm">
         @if (executionResult.length > 0) {
-        <thead>
-          <tr>
-            @for (colName of executionColumns; track colName) {
-            <th class="border px-2 py-1">{{ colName | titlecase }}</th>
+          <thead class="bg-gray-100 text-gray-700">
+            <tr>
+              @for (colName of executionColumns; track colName) {
+                <th class="border border-gray-300 px-4 py-2 font-semibold text-left">
+                  {{ colName | titlecase }}
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of executionResult; track row) {
+              <tr class="hover:bg-gray-50 transition">
+                @for (colName of executionColumns; track colName) {
+                  <td class="border border-gray-300 px-4 py-2">
+                    {{ row[colName] === null ? 'NULL' : row[colName] }}
+                  </td>
+                }
+              </tr>
             }
-          </tr>
-        </thead>
-        <tbody>
-          @for (row of executionResult; track row) {
-          <tr>
-            @for (colName of executionColumns; track colName) {
-            <td class="border px-2 py-1">{{ row[colName]=== null ? 'NULL' : row[colName] }}</td>
-            }
-          </tr>
-          }
-        </tbody>
+          </tbody>
         } @else {
-        <tbody>
-          <tr>
-            <td colspan="4" class="px-2 py-1 text-center text-gray-500">
-              No results found or execution failed.
-            </td>
-          </tr>
-        </tbody>
+          <tbody>
+            <tr>
+              <td colspan="4" class="px-4 py-3 text-center text-gray-500">
+                No results found or execution failed.
+              </td>
+            </tr>
+          </tbody>
         }
       </table>
       }
