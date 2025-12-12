@@ -74,7 +74,7 @@ export class Postgresql implements OnInit, OnDestroy {
     if (type === 'sql') {
       this.service.getSqlContent(path).subscribe({
         next: (content) => {
-          // <<< Muss jetzt { verwenden, um cdr.detectChanges() hinzuzufügen
+          console.log("Original SQL Content:", content);
           this.sqlContent = content;
           this.cdr.detectChanges(); // <<< Hinzugefügte Lösung
         },
