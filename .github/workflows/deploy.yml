@@ -80,24 +80,24 @@ jobs:
           key: ${{ secrets.OCI_SSH_KEY }}
           script: |
             set -e
-
+          
             echo "Pull latest Docker image"
             podman pull ghcr.io/techthordev/springboot-backend:latest
-
-            echo "Stop old container if running"
-            podman stop container-springboot-backend || true
-            podman rm container-springboot-backend || true
-
-            echo "Start container with auto-restart"
+          
+            echo "Remove old container and volumes"
+            podman rm -f container-springboot-backend || true
+          
+            echo "Start backend container with fresh env-file"
             podman run -d \
               --name container-springboot-backend \
               --restart=always \
               --env-file /home/opc/backend/.env \
               -p 8080:8080 \
               ghcr.io/techthordev/springboot-backend:latest
-
+          
             echo "Cleanup unused images"
             podman image prune -f
+          
+            echo "Show logs"
+            podman logs container-springboot-backend --tail 50
 
-            echo "Show last 20 logs"
-            podman logs container-springboot-backend --tail 20
