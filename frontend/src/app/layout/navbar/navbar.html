@@ -1,7 +1,28 @@
-<div class="grow hidden sm:ml-6 sm:flex sm:justify-end sm:space-x-2">
+<nav class="bg-gray-200 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+
+    <div class="flex items-center space-x-3 shrink-0">
+      <a [routerLink]="['/']" class="flex items-center space-x-3">
+        <img
+          src="./assets/thors-hammer-logo.jpg"
+          alt="TechThorDev Logo - Thor's Hammer"
+          class="h-10 w-auto rounded-full shadow-md"
+          onerror="
+            this.onerror = null;
+            this.src = 'https://placehold.co/40x40/007bff/ffffff?text=TD';
+          "
+        />
+        <span
+          class="text-3xl font-extrabold text-blue-500 hover:text-blue-800 transition duration-300 hidden sm:block"
+        >
+          TechThorDev - LeetCode Solutions
+        </span>
+      </a>
+    </div>
+
+    <div class="grow hidden sm:ml-6 sm:flex sm:justify-end sm:space-x-2">
       
       @for (link of navLinks(); track link.path) {
-        
         <button
           mat-button
           [routerLink]="link.path"
@@ -18,19 +39,21 @@
             <mat-icon class="ml-1 text-sm">arrow_drop_down</mat-icon>
           }
         </button>
-        
-        }
+      }
     </div>
 
     <mat-menu #dropdownMenu="matMenu">
-        @for (subLink of activeSubLinks(); track subLink.path) {
-            <a
-                mat-menu-item
-                [routerLink]="subLink.path"
-                routerLinkActive="bg-blue-100 text-blue-800 font-bold"
-                class="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-            >
-                {{ subLink.title }}
-            </a>
-        }
+      @for (subLink of activeSubLinks(); track subLink.path) {
+        <a
+          mat-menu-item
+          [routerLink]="subLink.path"
+          routerLinkActive="bg-blue-100 text-blue-800 font-bold"
+          class="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+        >
+          {{ subLink.title }}
+        </a>
+      }
     </mat-menu>
+    
+    </div>
+</nav>
