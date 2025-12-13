@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/1afaabdd-e668-42f6-9cfd-3976e1e4fbbe/console.sql" value="1afaabdd-e668-42f6-9cfd-3976e1e4fbbe" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/c4655d08-d7ea-4a76-971e-742a317fe7e3/console.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/c4655d08-d7ea-4a76-971e-742a317fe7e3/console_1.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/c4655d08-d7ea-4a76-971e-742a317fe7e3/console_2.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query.sql" value="1afaabdd-e668-42f6-9cfd-3976e1e4fbbe" />
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query_1.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query_2.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
+    <file url="file://$PROJECT_DIR$/.idea/queries/Query_3.sql" value="c4655d08-d7ea-4a76-971e-742a317fe7e3" />
   </component>
 </project>
