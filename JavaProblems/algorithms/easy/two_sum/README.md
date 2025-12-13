@@ -7,7 +7,7 @@ This project contains a Java implementation of the classic LeetCode problem **Tw
 Given an an array of integers `nums` and an integer `target`, return the **indices of the two numbers** such that they add up to `target`.  
 It is guaranteed that exactly one solution exists.
 
-For full description got directly to [LeetCode Problem Description](https://leetcode.com/problems/two-sum/description/)
+For full description go directly to [LeetCode Problem Description](https://leetcode.com/problems/two-sum/description/)
 
 ## Examples
 
@@ -109,4 +109,3 @@ src/
 >   - The solution uses a HashMap to store previously seen numbers and their indices.
 >   - For each number, we check if its complement (target - nums[i]) has already been seen.
 >   - If yes, we return the pair of indices. Otherwise, we store the current number in the map.
-
