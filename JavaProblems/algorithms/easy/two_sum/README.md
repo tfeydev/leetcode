@@ -4,7 +4,7 @@ This project contains a Java implementation of the classic LeetCode problem **Tw
 
 ## 📖 Problem Statement
 
-Given an an array of integers `nums` and an integer `target`, return the **indices of the two numbers** such that they add up to `target`.  
+Given an array of integers `nums` and an integer `target`, return the **indices of the two numbers** such that they add up to `target`.  
 It is guaranteed that exactly one solution exists.
 
 For full description go directly to [LeetCode Problem Description](https://leetcode.com/problems/two-sum/description/)
@@ -36,7 +36,6 @@ Output: [0,1]
 ## 🛠️ Java Solution
 
 [View Solution.java](https://www.google.com/search?q=src/main/java/br/com/techthordev/Solution.java)
-**// ÄNDERUNG: Pfad zur Solution.java vereinfacht und korrigiert**
 
 ## ⚡ Complexity Analysis
 
