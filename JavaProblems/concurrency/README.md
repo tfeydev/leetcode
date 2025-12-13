@@ -14,5 +14,5 @@ This directory focuses on challenges related to concurrent programming in Java. 
 
 | Problem | Focus Area | Status |
 | :--- | :--- | :--- |
-| **[FooBar]** | Thread Synchronization (Semaphores) | To be implemented |
+| **[Print in Order](./print_in_order/README.md)** | **Thread Synchronization (Semaphores)** | Implemented |
 | **[Dining Philosophers]** | Deadlock Prevention | To be implemented |

@@ -1,3 +1,9 @@
 rootProject.name = 'JavaProblems'
 
+// 1. Existing Algorithms Module
 include 'algorithms:easy:two_sum'
+project(':algorithms:easy:two_sum').projectDir = file('algorithms/easy/two_sum')
+
+// 2. Existing Concurrency Module
+include 'concurrency:easy:print_in_order'
+project(':concurrency:easy:print_in_order').projectDir = file('concurrency/easy/print_in_order')
