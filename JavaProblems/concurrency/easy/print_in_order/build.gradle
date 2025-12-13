@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'br.com.techthordev'
+version '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'br.com.techthordev.concurrency.print_in_order.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
+}
+
+application {
+    mainClass = 'br.com.techthordev.Main'
+}

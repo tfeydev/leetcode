@@ -1,0 +1,6 @@
+# This file is a placeholder for concurrency problems that do not have
+# a variable input size 'N' for complexity testing.
+# The complexity is O(1) in terms of synchronization overhead.
+
+# Performance is measured over a fixed number of repetitions (REPETITIONS in runner)
+# REPETITIONS=100000
