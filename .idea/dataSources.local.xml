@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-253.28294.334">
-    <data-source name="postgres@163.176.159.220" uuid="1afaabdd-e668-42f6-9cfd-3976e1e4fbbe">
-      <database-info product="PostgreSQL" version="13.22" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="13.22" exact-driver-version="42.7">
+    <data-source name="postgres@aws-1-sa-east-1.pooler.supabase.com" uuid="9eec91f1-41c4-4469-9a47-7de4eb944405">
+      <database-info product="PostgreSQL" version="17.6" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="17.6" exact-driver-version="42.7">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>leetcode</user-name>
+      <user-name>postgres.fjhavklbsddayyjhkjgp</user-name>
       <schema-mapping>
         <introspection-scope>
           <node negative="1">
-            <node kind="database" negative="1">
-              <name qname="@" />
-              <name qname="postgres" />
+            <node kind="database" qname="@">
               <node kind="schema" qname="@" />
             </node>
             <node kind="database" qname="postgres">
-              <node kind="schema" qname="public" />
-            </node>
-          </node>
-        </introspection-scope>
-      </schema-mapping>
-    </data-source>
-    <data-source name="leetcode@163.176.159.220" uuid="c4655d08-d7ea-4a76-971e-742a317fe7e3">
-      <database-info product="PostgreSQL" version="13.22" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="13.22" exact-driver-version="42.7">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>leetcode</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node negative="1">
-            <node kind="database" negative="1" />
-            <node kind="database">
-              <name qname="@" />
-              <name qname="leetcode_db" />
-              <node kind="schema" negative="1" />
+              <node kind="schema">
+                <name qname="lc_175" />
+                <name qname="leetcode" />
+              </node>
             </node>
           </node>
         </introspection-scope>
