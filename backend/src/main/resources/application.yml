@@ -1,104 +1,14 @@
-name: Build and Publish Backend
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-permissions:
-  contents: read
-  packages: write
-  pages: write
-
-jobs:
-  build-and-push:
-    name: Build JAR and Push Docker image to GHCR
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Java 25
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '25'
-
-      - name: Cache Gradle
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/gradle-wrapper.properties') }}
-
-      - name: Build backend JAR
-        working-directory: ./backend
-        run: |
-          chmod +x ./gradlew
-          ./gradlew clean bootJar -x test --no-daemon
-
-      - name: Upload JAR artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: springboot-jar
-          path: backend/build/libs/*.jar
-
-      - name: Log in to GHCR
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./backend
-          file: ./backend/Dockerfile
-          push: true
-          tags: |
-            ghcr.io/techthordev/springboot-backend:latest
-            ghcr.io/techthordev/springboot-backend:${{ github.sha }}
-          platforms: linux/amd64
-
-      - name: Verify pushed image
-        run: echo "Pushed ghcr.io/techthordev/springboot-backend:latest"
-
-  deploy-to-oci:
-    name: Deploy to OCI VM
-    runs-on: ubuntu-latest
-    needs: build-and-push
-
-    steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.OCI_HOST }}
-          username: opc
-          key: ${{ secrets.OCI_SSH_KEY }}
-          script: |
-            set -e
-
-            echo "Pull latest Docker image"
-            podman pull ghcr.io/techthordev/springboot-backend:latest
-
-            echo "Stop old container"
-            podman stop container-springboot-backend || true
-            podman rm container-springboot-backend || true
-
-            echo "Start container with .env"
-            podman run -d \
-              --name container-springboot-backend \
-              --restart=always \
-              --env-file /home/opc/backend/.env \
-              -p 8080:8080 \
-              ghcr.io/techthordev/springboot-backend:latest
-
-            echo "Cleanup unused images"
-            podman image prune -f
-
-            echo "Show backend logs"
-            podman logs container-springboot-backend --tail 50
+jpa:
+  show-sql: false
+  open-in-view: false
