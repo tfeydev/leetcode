@@ -4,7 +4,15 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 0
+      initialization-fail-timeout: -1
+      connection-timeout: 30000
+      validation-timeout: 5000
+
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
