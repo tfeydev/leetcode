@@ -73,5 +73,5 @@ jobs:
         with:
           service: springboot-backend
           image: ghcr.io/techthordev/springboot-backend:latest
-          region: southamerica-east1
+          region: us-central1east1
           flags: --allow-unauthenticated --port=8080 --min-instances=0
