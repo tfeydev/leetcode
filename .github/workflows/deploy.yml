@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   id-token: write  # WICHTIG: Erlaubt das Abrufen des OIDC-Tokens für GCP WIF
+  packages: write
 
 jobs:
   build-and-deploy:
