@@ -2,4 +2,4 @@ FROM eclipse-temurin:25-jre
 WORKDIR /app
 COPY build/libs/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "/app/app.jar"]
+ENTRYPOINT java -Dserver.port=$PORT -jar /app/app.jar
