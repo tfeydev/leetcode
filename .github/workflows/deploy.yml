@@ -90,5 +90,5 @@ jobs:
             DB_URL=${{ secrets.DB_URL }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            GITHUB_TREE_API_URL=${{ secrets.GITHUB_TREE_API_URL }}
-            GITHUB_RAW_BASE_URL=${{ secrets.GITHUB_RAW_BASE_URL }}
+            GITHUB_TREE_API_URL=${{ secrets.GH_TREE_API_URL }}
+            GITHUB_RAW_BASE_URL=${{ secrets.GH_RAW_BASE_URL }}
