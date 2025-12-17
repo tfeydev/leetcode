@@ -82,4 +82,4 @@ jobs:
           image: ${{ env.GAR_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/springboot-backend:latest
           region: us-central1
           # Hinzugefügt: Erhöht das Timeout auf 5 Minuten (300 Sekunden)
-          flags: --allow-unauthenticated --port=8080 --min-instances=0 --timeout=300
+          flags: --allow-unauthenticated --port=8080 --min-instances=0 --timeout=300 --set-env-vars=PORT=8080
