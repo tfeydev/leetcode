@@ -81,5 +81,14 @@ jobs:
           service: springboot-backend
           image: ${{ env.GAR_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/springboot-backend:latest
           region: us-central1
-          # Hinzugefügt: Erhöht das Timeout auf 5 Minuten (300 Sekunden)
-          flags: --allow-unauthenticated --port=8080 --min-instances=0 --timeout=300 --set-env-vars=PORT=8080
+          flags: |
+            --allow-unauthenticated 
+            --port=8080 
+            --min-instances=0 
+            --timeout=300 
+            --set-env-vars=PORT=8080, \
+            DB_URL=${{ secrets.DB_URL }}, \
+            DB_USERNAME=${{ secrets.DB_USERNAME }}, \
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}, \
+            GITHUB_TREE_API_URL=${{ secrets.GH_TREE_API_URL }}, \
+            GITHUB_RAW_BASE_URL=${{ secrets.GH_RAW_BASE_URL }}
