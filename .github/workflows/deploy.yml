@@ -81,12 +81,13 @@ jobs:
           service: springboot-backend
           image: ${{ env.GAR_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/springboot-backend:latest
           region: us-central1
+          # Die folgenden Parameter definieren die Konfiguration, die Cloud Run setzt
           allow_unauthenticated: true
           port: 8080
           min_instances: 0
           timeout: 300
+          # KORRIGIERT: PORT=8080 entfernt, da es eine reservierte Variable ist
           env_vars: |
-            PORT=8080
             DB_URL=${{ secrets.DB_URL }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
