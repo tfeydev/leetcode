@@ -79,7 +79,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v3
         with:
           service: springboot-backend
-          # AR-URL wird hier direkt zusammengebaut:
           image: ${{ env.GAR_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/springboot-backend:latest
           region: us-central1
-          flags: --allow-unauthenticated --port=8080 --min-instances=0
+          # Hinzugefügt: Erhöht das Timeout auf 5 Minuten (300 Sekunden)
+          flags: --allow-unauthenticated --port=8080 --min-instances=0 --timeout=300
