@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:leetcode": "cd frontend && ng build  --configuration production",
+    "build:leetcode": "ng build  --configuration production",
     "watch": "ng build --watch --configuration development",
     "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-techthordev-app",
     "test": "ng test"
