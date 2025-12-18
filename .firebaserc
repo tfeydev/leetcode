@@ -5,7 +5,7 @@
   "targets": {
     "techthordev": {
       "hosting": {
-        "leetcode-app": [
+        "leetcode-techthordev-app": [
           "leetcode-techthordev-app"
         ]
       }
