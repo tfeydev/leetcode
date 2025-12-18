@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "leetcode-app",
+    "target": "leetcode-techthordev-app",
     "public": "frontend/dist/frontend/browser",
     "ignore": [
       "firebase.json",
