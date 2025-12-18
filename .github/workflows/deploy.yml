@@ -93,37 +93,3 @@ jobs:
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             GITHUB_TREE_API_URL=${{ secrets.GH_TREE_API_URL }}
             GITHUB_RAW_BASE_URL=${{ secrets.GH_RAW_BASE_URL }}
-          
-  # # -----------------------------------------------------------------
-  # # NEW JOB: FRONTEND DEPLOYMENT (FIREBASE HOSTING)
-  # # -----------------------------------------------------------------
-  # deploy-frontend-hosting:
-  #   runs-on: ubuntu-latest
-  #   # Optional: Only run this job if the backend build/deploy succeeded
-  #   # You might want to remove this dependency if the frontend can deploy independently
-  #   needs: [build-and-deploy] 
-    
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  
-  #     # 1. SETUP NODE.JS (REQUIRED for 'ng build')
-  #     # The runner needs Node.js environment to run npm and Angular CLI
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '22' # Use your required Node version
-  
-  #     # 2. INSTALL DEPENDENCIES
-  #     # Install project dependencies (including Angular CLI) before building
-  #     - name: Install dependencies
-  #       run: npm install
-  
-  #     # 3. DEPLOY TO FIREBASE
-  #     # The npm script 'deploy:main' executes the build and deployment to Firebase Hosting
-  #     - name: Deploy Angular App to Firebase Hosting
-  #       run: npm run deploy:main
-  #       env:
-  #         # IMPORTANT: Firebase CLI needs an authentication token to deploy.
-  #         # The token is generated via 'firebase login:ci' and stored as a GitHub Secret.
-  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
