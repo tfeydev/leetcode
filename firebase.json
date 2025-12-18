@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "leetcode-app",
+    "public": "frontend/dist/frontend/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

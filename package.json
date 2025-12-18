@@ -1,0 +1,9 @@
+{
+  "name": "leetcode-deployment-root",
+  "version": "1.0.0",
+  "description": "Deployment scripts to target frontend sub-project.",
+  "scripts": {
+    "build:leetcode": "cd frontend && npm run build -- --configuration production",
+    "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-app"
+  }
+}

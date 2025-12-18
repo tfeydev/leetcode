@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "techthordev"
+  },
+  "targets": {
+    "techthordev": {
+      "hosting": {
+        "leetcode-app": [
+          "leetcode-techthordev-app"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
