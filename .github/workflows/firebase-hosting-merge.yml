@@ -25,12 +25,13 @@ jobs:
         run: |
           cd frontend
           npm ci
-          npm run build -- --configuration production # Dein reguläres Build-Skript
+          npm run build -- --configuration production 
 
       # 3. DEPLOY TO FIREBASE (uses the service account)
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
+          # WICHTIG: Service Account muss hier übergeben werden
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: techthordev
           channelId: live
