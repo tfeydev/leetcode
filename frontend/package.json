@@ -7,7 +7,7 @@
     "build": "ng build",
     "build:leetcode": "cd frontend && npm run build -- --configuration production",
     "watch": "ng build --watch --configuration development",
-    "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-app",
+    "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-techthordev-app",
     "test": "ng test"
   },
   "prettier": {
