@@ -11,18 +11,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install frontend dependencies
-        working-directory: frontend
-        run: npm install
+      # 1. SETUP NODE.JS (Essential for Angular/npm)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21' 
 
-      - name: Build Angular app
-        working-directory: frontend
-        run: npm run build:leetcode
+      # 2. INSTALL FRONTEND DEPENDENCIES AND BUILD
+      # Navigate directly to the 'frontend' directory for installation and build.
+      # This ensures 'ng' is correctly found in ./node_modules/.bin/
+      - name: Install dependencies and Run Build
+        # WICHTIG: Verwende 'npm ci' für schnelleren und saubereren CI-Install
+        run: |
+          cd frontend
+          npm ci
+          npm run build -- --configuration production # Dein reguläres Build-Skript
 
-      - name: Deploy to Firebase Hosting (live)
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      # 3. DEPLOY TO FIREBASE (uses the service account)
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TECHTHORDEV }}
-          channelId: live
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: techthordev
+          channelId: live
