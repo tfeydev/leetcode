@@ -35,3 +35,4 @@ jobs:
           projectId: 'techthordev'
           target: 'compodoc-leetcode-api'
           entryPoint: '.'
+          channelId: 'live'
