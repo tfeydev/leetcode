@@ -7,6 +7,9 @@
       "hosting": {
         "leetcode-techthordev-app": [
           "leetcode-techthordev-app"
+        ],
+        "compodoc-leetcode-api": [
+          "compodoc-leetcode-api"
         ]
       }
     }

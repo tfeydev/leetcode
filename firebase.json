@@ -1,17 +1,20 @@
 {
-  "hosting": {
-    "target": "leetcode-techthordev-app",
-    "public": "frontend/dist/frontend/browser",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "leetcode-techthordev-app",
+      "public": "frontend/dist/frontend/browser",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "compodoc-leetcode-api",
+      "public": "frontend/compodoc-leetcode-build",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    }
+  ]
 }

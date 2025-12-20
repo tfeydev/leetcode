@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "TechThor LeetCode Project",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,10 @@
     "build:leetcode": "ng build  --configuration production",
     "watch": "ng build --watch --configuration development",
     "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-techthordev-app",
-    "test": "ng test"
+    "test": "ng test",
+    "docs:build": "compodoc -c compodoc.json -p tsconfig.json -d compodoc-leetcode-build --name \"LeetCode Project API Docs\"",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "prettier": {
     "printWidth": 100,
@@ -44,6 +47,7 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.2",
     "@angular/compiler-cli": "^21.0.0",
+    "@compodoc/compodoc": "^1.1.32",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/prismjs": "^1.26.5",
     "jsdom": "^27.1.0",
