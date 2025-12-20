@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Dependencies (Root & Frontend)
+        run: |
+          npm install
+          cd frontend
+          npm install
 
       - name: Build Compodoc Docs
         run: npm run docs:build
