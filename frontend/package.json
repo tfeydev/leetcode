@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-techthordev-app",
     "test": "ng test",
-    "docs:build": "compodoc -c compodoc.json -p tsconfig.json -d compodoc-leetcode-build --name \"LeetCode Project API Docs\"",
+    "docs:build": "compodoc -c compodoc.json -p tsconfig.json -d compodoc-leetcode-build --name \"LeetCode Project API Docs\" --baseHref /api/leetcode/",
     "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
     "compodoc:serve": "compodoc -s"
   },
