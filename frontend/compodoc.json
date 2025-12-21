@@ -1,6 +1,6 @@
 {
   "name": "LeetCode Project API Docs",
-  "baseUrl": "/api/leetcode/",
+  "baseUrl": "/",
   "disablePrivate": true,
   "disableProtected": true,
   "disableInternal": true,
