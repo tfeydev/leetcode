@@ -1,4 +1,4 @@
-name: Build Compodoc LeetCode API Docs
+name: Build and Deploy LeetCode Compodoc Docs
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -18,18 +18,21 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Dependencies (Root & Frontend)
+      - name: Install Dependencies
         run: |
-          npm install
+          npm install 
           cd frontend
           npm install
 
-      - name: Build Compodoc Docs
+      - name: Build Compodoc Docs (Erstellt den Ordner 'frontend/compodoc-leetcode-build')
         run: npm run docs:build
         working-directory: ./frontend
-
-      - name: Upload Compodoc build as artifact
-        uses: actions/upload-artifact@v4
+        
+      - name: Deploy Compodoc to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          name: compodoc-leetcode-api
-          path: frontend/dist   # hier dein Build-Ordner, nicht index.html
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TECHTHOR_DOCS }}' 
+          channelId: live
+          target: compodoc-leetcode-api
+          projectId: techthor-docs

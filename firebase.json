@@ -14,7 +14,13 @@
     {
       "target": "compodoc-leetcode-api",
       "public": "frontend/compodoc-leetcode-build",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
   ]
 }

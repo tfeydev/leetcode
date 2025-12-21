@@ -1,1 +1,0 @@
-var ROUTES_INDEX = {"name":"<root>","kind":"module","className":"TemplatePlaygroundModule","children":[{"name":"Content","kind":"component","path":"","filename":"src/app/app.routes.ts"},{"name":"Postgresql","kind":"component","path":"postgresql","filename":"src/app/app.routes.ts"},{"name":"Java","kind":"component","path":"java","filename":"src/app/app.routes.ts"}]}

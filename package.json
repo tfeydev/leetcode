@@ -5,6 +5,6 @@
   "scripts": {
     "build:leetcode": "cd frontend && npm run build -- --configuration production",
     "deploy:leetcode": "npm run build:leetcode && firebase deploy --only hosting:leetcode-techthordev-app",
-    "docs:build": "compodoc -c compodoc.json -p tsconfig.json -d dist --name \"LeetCode Project API Docs\""
+    "docs:build": "compodoc -c compodoc.json -p tsconfig.json -d compodoc-leetcode-build --name \"LeetCode Project API Docs\""
   }
 }
