@@ -35,4 +35,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TECHTHOR_DOCS }}' 
           channelId: live
           target: compodoc-leetcode-api
-          projectId: techthor-docs
+          projectId: compodoc-leetcode-api
