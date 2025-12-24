@@ -1,7 +1,3 @@
-Sehr gerne! 🎉 Hier ist eine verbesserte Version deiner README mit dem Linger-Fix integriert:
-
----
-
 # 🚀 LeetCode – Java & PostgreSQL Solutions
 
 This repository documents my journey solving **LeetCode problems** using **Java** and **PostgreSQL**.
