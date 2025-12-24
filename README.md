@@ -205,6 +205,8 @@ INSERT INTO Address VALUES (1, 2, 'New York', 'NY');
 
 ## 📝 License
 
+**MIT License**
+
 This repository is for educational purposes. LeetCode problems are property of LeetCode.
 
 ---
